@@ -4,7 +4,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 const app = express();
-const port = 3000;
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -47,7 +47,4 @@ app.post('/send-email',(req,res)=>{
   });
 })
 
-app.listen
-(port,()=>{
-  console.log(`Server listening at http://localhost:${port}`)
-})
+app.listen();
