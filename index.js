@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-
+require('dotenv').config()
 const app = express();
 const port = 3000;
 
@@ -20,15 +20,15 @@ app.post('/send-email',(req,res)=>{
     port: 465,
     secure: true,
     auth:{
-      user:"jorge.jlpm987@gmail.com",
-      pass:"ljbxvizjjtoavbyl"
+      user:process.env.DB_USER,
+      pass:process.env.DB_PASS
     }
   });
 
   const mailOptions = {
-    from: 'jorge.jlp987@gmail.com',
-    to: 'jorge.jlp987@gmail.com', // Replace with recipient email address
-    subject: 'New Contact Form Submission',
+    from: process.env.DB_USER,
+    to: process.env.DB_USER, // Replace with recipient email address
+    subject: 'Una nueva persona ha enviado un formulario',
     text: `
       Name: ${name}
       Email: ${email}
