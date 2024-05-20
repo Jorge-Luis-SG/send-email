@@ -4,10 +4,13 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 const app = express();
-
+const port = 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:4200', 'https://send-email-2roj.onrender.com']
+}));
 
 app.post('/send-email',(req,res)=>{
   const name = req.body.name;
@@ -38,7 +41,7 @@ app.post('/send-email',(req,res)=>{
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log(error);
+      console.error(error);
       res.status(500).send('Error sending email');
     } else {
       console.log('Email sent:', info.response);
@@ -47,4 +50,6 @@ app.post('/send-email',(req,res)=>{
   });
 })
 
-app.listen();
+app.listen(port,()=>{
+  console.log(`Server is running on port ${port}`);
+});
